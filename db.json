@@ -1,0 +1,40 @@
+{
+  "authorization": [
+    {
+      "userId": "1",
+      "login": "test@test.com",
+      "password": "test@test.com"
+    }
+  ],
+  "contacts": [
+    {
+      "id": "1",
+      "name": "Vasya",
+      "isFriend": false
+    },
+    {
+      "name": "Fedya",
+      "id": "4"
+    },
+    {
+      "name": "Liza",
+      "id": "ed764720-cc7e-11ec-b94f-bdea5d5f3ffc",
+      "isFollowed": false
+    },
+    {
+      "name": "Masha",
+      "id": "f5187890-cc7e-11ec-b94f-bdea5d5f3ffc",
+      "isFollowed": false
+    },
+    {
+      "id": "5c34c620-cc82-11ec-b24d-113ae47168da",
+      "name": "Kuzya",
+      "isFollowed": false
+    },
+    {
+      "name": "Sveta",
+      "id": "85d4e910-cc91-11ec-8250-1d6dd69a5bcd",
+      "isFollowed": true
+    }
+  ]
+}
