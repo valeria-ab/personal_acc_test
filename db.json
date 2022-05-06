@@ -8,13 +8,14 @@
   ],
   "contacts": [
     {
-      "id": "1",
       "name": "Vasya",
-      "isFriend": false
+      "id": "1",
+      "isFollowed": false
     },
     {
       "name": "Fedya",
-      "id": "4"
+      "id": "4",
+      "isFriend": false
     },
     {
       "name": "Liza",
@@ -24,7 +25,7 @@
     {
       "name": "Masha",
       "id": "f5187890-cc7e-11ec-b94f-bdea5d5f3ffc",
-      "isFollowed": false
+      "isFollowed": true
     },
     {
       "id": "5c34c620-cc82-11ec-b24d-113ae47168da",
@@ -35,6 +36,46 @@
       "name": "Sveta",
       "id": "85d4e910-cc91-11ec-8250-1d6dd69a5bcd",
       "isFollowed": true
+    },
+    {
+      "name": "Vitya",
+      "id": "8e75d5c0-cca5-11ec-9b71-6ff9de37fa36",
+      "isFollowed": true
+    },
+    {
+      "id": "97ae85b0-cca5-11ec-9b71-6ff9de37fa36",
+      "name": "Zina",
+      "isFollowed": false
+    },
+    {
+      "id": "9b349f30-cca5-11ec-9b71-6ff9de37fa36",
+      "name": "Pasha",
+      "isFollowed": false
+    },
+    {
+      "id": "cfd939c0-cca6-11ec-9b71-6ff9de37fa36",
+      "name": "John",
+      "isFollowed": false
+    },
+    {
+      "id": "dd235340-cca6-11ec-9b71-6ff9de37fa36",
+      "name": "Kolyan",
+      "isFollowed": false
+    },
+    {
+      "name": "Pyotr Ivanych",
+      "id": "139b6ac0-cca7-11ec-9b71-6ff9de37fa36",
+      "isFollowed": true
+    },
+    {
+      "name": "зюзя",
+      "id": "dad21730-cd1d-11ec-9e9c-27289018b4e4",
+      "isFollowed": true
+    },
+    {
+      "name": "hahaha",
+      "id": "40d98770-cd23-11ec-a540-275e2d835c61",
+      "isFollowed": false
     }
   ]
 }

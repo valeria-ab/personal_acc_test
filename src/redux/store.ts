@@ -1,7 +1,6 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {loginReducer} from './login-reducer';
 import thunkMiddleware from 'redux-thunk';
-import { useDispatch } from 'react-redux';
 import {contactsReducer} from './contacts-reducer';
 
 

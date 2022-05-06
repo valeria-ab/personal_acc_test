@@ -13,10 +13,7 @@ type  AddPackPropsType = {
 export const AddContact = React.memo((props: AddPackPropsType) => {
 
     const [name, setName] = useState<string>("");
-
     const dispatch = useDispatch()
-
-
 
     const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
         setName(e.currentTarget.value)

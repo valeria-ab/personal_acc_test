@@ -2,8 +2,8 @@ import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, Checkbox, FormControl, FormControlLabel, FormGroup, Grid, TextField} from '@mui/material';
 import {useFormik} from 'formik';
-import {loginTC} from '../../redux/login-reducer';
-import {AppRootStateType} from '../../redux/store';
+import {loginTC} from '../redux/login-reducer';
+import {AppRootStateType} from '../redux/store';
 import {Navigate} from 'react-router-dom';
 
 
@@ -27,16 +27,6 @@ const Login = React.memo(() => {
             rememberMe: false,
         },
         validate: (values) => {
-            //   if (!values.email) {
-            //     return {
-            //       email: "Email is required",
-            //     };
-            //   }
-            //   if (!values.password) {
-            //     return {
-            //       password: "Password is required",
-            //     };
-            //   }
 
             const errors: FormikErrorType = {};
             if (!values.email) {
@@ -61,23 +51,13 @@ const Login = React.memo(() => {
         },
     });
 
-
-    // const isInitialized = useSelector<IAppStore, boolean>((state) => state.app.isInitialized);
-
-
-    // const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    //     e.preventDefault();
-    //     dispatch(signIn({email, password, rememberMe}));
-    // };
-
     if (isLoggedIn) {
         return <Navigate to={'/'}/>
     }
 
     return (
 
-
-        <Grid container justifyContent={'center'}>
+        <Grid container justifyContent={'center'} style={{marginTop: "10%"}}>
             <Grid item justifyContent={'center'}>
                 <form
                     onSubmit={formik.handleSubmit}
@@ -88,7 +68,6 @@ const Login = React.memo(() => {
                                 label="Email"
                                 margin="normal"
                                 {...formik.getFieldProps("email")}
-                                // value="test@test.com"
                             />
                             {formik.touched.email && formik.errors.email && (
                                 <div style={{ color: "red" }}>{formik.errors.email}</div>
@@ -98,7 +77,6 @@ const Login = React.memo(() => {
                                 label="Password"
                                 margin="normal"
                                 {...formik.getFieldProps("password")}
-                                // value="test@test.com"
                             />
                             {formik.touched.password && formik.errors.password && (
                                 <div style={{ color: "red" }}>{formik.errors.password}</div>

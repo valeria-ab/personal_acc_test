@@ -15,7 +15,6 @@
 
 .wrapper {
     width: 400px;
-    /*height: 220px;*/
     background: #f9f9fe;
     border-radius: 8px;
 }
@@ -40,7 +39,6 @@
 
 .title {
     margin-bottom: 20px;
-    font-family: 'Poppins';
     font-weight: 600;
     font-size: 22px;
     line-height: 33px;

@@ -1,10 +1,8 @@
-import {AnyAction, Dispatch} from 'redux';
-import {ThunkAction} from 'redux-thunk';
-
-
+import {AnyAction} from 'redux';
 import {contactsApi, ContactType} from '../api/api';
 import {AppRootStateType} from './store';
-import {LoginActions} from './login-reducer';
+import {setError} from './login-reducer';
+import {ThunkAction} from 'redux-thunk';
 
 
 export type InitialStateType = {
@@ -20,7 +18,6 @@ const initialState: InitialStateType = {
 export const contactsReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case 'CONTACTS/SET-CONTACTS':
-            // debugger
             return {...state, contacts: action.payload}
 
         case 'CONTACTS/SET-SEARCH-CONTACT-NAME':
@@ -39,187 +36,61 @@ export const setSearchContactNameAC = (contactName: string) =>
     ({type: 'CONTACTS/SET-SEARCH-CONTACT-NAME', contactName} as const)
 
 
-
 type ActionsType =
     | ReturnType<typeof setContactsAC>
     | ReturnType<typeof setSearchContactNameAC>
-
-
+    | ReturnType<typeof setError>
 
 
 // thunk
-export const getContactsTC = (): any  =>
-    // ThunkAction<void, AppRootStateType, unknown, AnyAction>
+export const getContactsTC = (): ThunkAction<void, AppRootStateType, unknown, AnyAction> =>
 
-    (dispatch: Dispatch, getState: () => AppRootStateType) => {
-
+    (dispatch, getState: () => AppRootStateType) => {
         const {contactName} = getState().contacts;
-
-        // dispatch(setAppLoading('loading'))
-
         contactsApi.getContacts(contactName)
             .then((res) => {
                 dispatch(setContactsAC(res.data))
-                console.log(res)
             })
-            // .catch((err) => {
-            //     dispatch(setErrorAC(err.response.data.error))
-            //     if (err.response.data.error === 'you are not authorized /ᐠ-ꞈ-ᐟ\\') {
-            //         dispatch(setInitializedAC(false))
-            //         dispatch(setUserProfile({
-            //             _id: '',
-            //             email: '',
-            //             name: '',
-            //             avatar: '',
-            //             publicCardPacksCount: 0,
-            //             created: '',
-            //             updated: '',
-            //             isAdmin: false,
-            //             verified: false,
-            //             rememberMe: false,
-            //             error: '',
-            //             token: '',
-            //             tokenDeathTime: 0,
-            //             __v: 0
-            //         }));
-            //         dispatch(setCardPacksPageCountAC(10))
-            //         dispatch(setCardsPageCountAC(10))
-            //         dispatch(setCardsPacksCountFromRangeAC([0, 1000]))
-            //         dispatch(redirectToLogin(true))
-            //
-            //         dispatch(setWithMyIdAC(true))
-            //         dispatch(changeLayoutAC('profile'))
-            //         dispatch(setSortPacksValueAC(''))
-            //     }
-            // })
-            // .finally(() => dispatch(setAppLoading('idle')))
-
+            .catch((err) => {
+                dispatch(setError('Some error occurred'))
+            })
     }
 
-export const createContactTC = ( payload: ContactType): any    =>
-    // ThunkAction<void, AppRootStateType, unknown, AnyAction>
-  (dispatch: Dispatch) => {
-    // dispatch(setAppLoading('loading'))
-    contactsApi.createContact(payload)
-        .then((res) => {
-            dispatch(getContactsTC())
-        })
-        // .catch((err) => {
-        //     dispatch(setErrorAC(err.response.data.error))
-        //     if (err.response.data.error === 'you are not authorized /ᐠ-ꞈ-ᐟ\\') {
-        //         dispatch(setInitializedAC(false))
-        //         dispatch(setUserProfile({
-        //             _id: '',
-        //             email: '',
-        //             name: '',
-        //             avatar: '',
-        //             publicCardPacksCount: 0,
-        //             created: '',
-        //             updated: '',
-        //             isAdmin: false,
-        //             verified: false,
-        //             rememberMe: false,
-        //             error: '',
-        //             token: '',
-        //             tokenDeathTime: 0,
-        //             __v: 0
-        //         }));
-        //         dispatch(setCardPacksPageCountAC(10))
-        //         dispatch(setCardsPageCountAC(10))
-        //         dispatch(setCardsPacksCountFromRangeAC([0, 1000]))
-        //         dispatch(redirectToLogin(true))
-        //
-        //         dispatch(setWithMyIdAC(true))
-        //         dispatch(changeLayoutAC('profile'))
-        //         dispatch(setSortPacksValueAC(''))
-        //     }
-        // })
-        // .finally(() => dispatch(setAppLoading('idle')))
-}
+export const createContactTC = (payload: ContactType): ThunkAction<void, AppRootStateType, unknown, AnyAction> =>
+    (dispatch) => {
+        contactsApi.createContact(payload)
+            .then((res) => {
+                dispatch(getContactsTC())
+            })
+            .catch((err) => {
+                dispatch(setError('Some error occurred'))
+            })
+    }
 
 
-export const deleteContactTC = (contactID: string): any=>
-// ThunkAction<void, AppRootStateType, unknown, AnyAction>
-(dispatch: Dispatch) => {
-    // dispatch(setAppLoading('loading'))
-    contactsApi.deleteContact(contactID)
-        .then((res) => {
-            dispatch(getContactsTC())
-        })
-        // .catch((err) => {
-        //     dispatch(setErrorAC(err.response.data.error))
-        //     if (err.response.data.error === 'you are not authorized /ᐠ-ꞈ-ᐟ\\') {
-        //         dispatch(setInitializedAC(false))
-        //         dispatch(setUserProfile({
-        //             _id: '',
-        //             email: '',
-        //             name: '',
-        //             avatar: '',
-        //             publicCardPacksCount: 0,
-        //             created: '',
-        //             updated: '',
-        //             isAdmin: false,
-        //             verified: false,
-        //             rememberMe: false,
-        //             error: '',
-        //             token: '',
-        //             tokenDeathTime: 0,
-        //             __v: 0
-        //         }));
-        //         dispatch(setCardPacksPageCountAC(10))
-        //         dispatch(setCardsPageCountAC(10))
-        //         dispatch(setCardsPacksCountFromRangeAC([0, 1000]))
-        //         dispatch(redirectToLogin(true))
-        //
-        //         dispatch(setWithMyIdAC(true))
-        //         dispatch(changeLayoutAC('profile'))
-        //         dispatch(setSortPacksValueAC(''))
-        //     }
-        // })
-        // .finally(() => dispatch(setAppLoading('idle')))
-}
+export const deleteContactTC = (contactID: string): ThunkAction<void, AppRootStateType, unknown, AnyAction> =>
+    (dispatch) => {
+        contactsApi.deleteContact(contactID)
+            .then((res) => {
+                dispatch(getContactsTC())
+            })
+            .catch((err) => {
+                dispatch(setError('Some error occurred'))
+            })
+    }
 
 
-export const updateContactTC = (payload: ContactType): any =>
-    // ThunkAction<void, AppRootStateType, unknown, AnyAction>
-    (dispatch: Dispatch, getState: () => AppRootStateType) => {
-    // dispatch(setAppLoading('loading'))
-    contactsApi.updateContact(payload)
-        .then((res) => {
-            dispatch(getContactsTC())
-        })
-        // .catch((err) => {
-        //     dispatch(setErrorAC(err.response.data.error))
-        //     if (err.response.data.error === 'you are not authorized /ᐠ-ꞈ-ᐟ\\') {
-        //         dispatch(setInitializedAC(false))
-        //         dispatch(setUserProfile({
-        //             _id: '',
-        //             email: '',
-        //             name: '',
-        //             avatar: '',
-        //             publicCardPacksCount: 0,
-        //             created: '',
-        //             updated: '',
-        //             isAdmin: false,
-        //             verified: false,
-        //             rememberMe: false,
-        //             error: '',
-        //             token: '',
-        //             tokenDeathTime: 0,
-        //             __v: 0
-        //         }));
-        //         dispatch(setCardPacksPageCountAC(10))
-        //         dispatch(setCardsPageCountAC(10))
-        //         dispatch(setCardsPacksCountFromRangeAC([0, 1000]))
-        //         dispatch(redirectToLogin(true))
-        //
-        //         dispatch(setWithMyIdAC(true))
-        //         dispatch(changeLayoutAC('profile'))
-        //         dispatch(setSortPacksValueAC(''))
-        //     }
-        // })
-        // .finally(() => dispatch(setAppLoading('idle')))
-}
+export const updateContactTC = (payload: ContactType): ThunkAction<void, AppRootStateType, unknown, AnyAction> =>
+
+    (dispatch, getState: () => AppRootStateType) => {
+        contactsApi.updateContact(payload)
+            .then((res) => {
+                dispatch(getContactsTC())
+            })
+            .catch((err) => {
+                dispatch(setError('Some error occurred'))
+            })
+    }
 
 
 

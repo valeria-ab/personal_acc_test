@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './ModalsCommonStyles.module.css';
 import {useDispatch} from 'react-redux';
 import {updateContactTC} from '../../redux/contacts-reducer';
@@ -13,14 +13,10 @@ type  EditContactPropsType = {
 
 export const EditContact = (props: EditContactPropsType) => {
 
-
     const [name, setname] = useState<string>(props.contact.name);
     const [isFollowed, setIsFollowed] = useState<boolean>(props.contact.isFollowed);
 
-    console.log(isFollowed)
-
     const dispatch = useDispatch()
-
 
     const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
         setname(e.currentTarget.value)
@@ -31,15 +27,10 @@ export const EditContact = (props: EditContactPropsType) => {
             name: name,
             id: props.contact.id,
             isFollowed: isFollowed
-            // isFollowed: false
         }))
         props.setEditMode(false)
     }
 
-
-    // useEffect(() => {
-    //     setname(props.contact.name)
-    // }, [props.contact.name])
 
     return (
         <div className={s.modal}>
@@ -58,10 +49,9 @@ export const EditContact = (props: EditContactPropsType) => {
                     <label className={s.text}>Followed:
                         <input
                             type="checkbox"
-                            // className={s.input}
+                            value={"checkbox"}
                             checked={isFollowed}
                             onChange={(e) => setIsFollowed(e.currentTarget.checked)}
-                            // onClick={setIsFriend}
                         />
                     </label>
                     <div className={s.wrapBtn}>
